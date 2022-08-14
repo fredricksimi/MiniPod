@@ -21,6 +21,7 @@ jobs:
       - run:
           name: Run Tests
           command: |
+            python -m venv venv
             source venv/bin/activate
             python ./manage.py test
 
