@@ -1,0 +1,35 @@
+version: 2.1
+
+jobs:
+  make-virtual-environment:
+    docker:
+      - image: cimg/python:3.10.6
+    steps:
+      - checkout
+      - run:
+          name: Virtual Environment
+          command: |
+          cd MiniPod
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+
+  run-tests:
+    docker:
+      - image: cimg/python:3.10.6
+    steps:
+      - checkout
+      - run:
+          name: Run Tests
+          command: |
+          cd MiniPod
+          source venv/bin/activate
+          python ./manage.py test
+
+workflows:
+  default:
+    jobs:
+      - make-virtual-environment
+      - run-tests:
+          requires:
+            - make-virtual-environment
