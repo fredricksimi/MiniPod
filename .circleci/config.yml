@@ -9,7 +9,6 @@ jobs:
       - run:
           name: Virtual Environment
           command: |
-            cd MiniPod
             python -m venv venv
             source venv/bin/activate
             pip install -r requirements.txt
@@ -22,7 +21,6 @@ jobs:
       - run:
           name: Run Tests
           command: |
-            
             python ./manage.py test
 
 workflows:
